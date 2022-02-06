@@ -21,11 +21,17 @@ def getListWifi():
         getwifipass = getwifipass.split("\\n")
 
         for i in range(len(getwifipass)):
-            if "Key Content" in getwifipass[i]:
-                wipass = getwifipass[i]
-                wipass = wipass.split(":")
-                wipass[1] = wipass[1].replace("\\r", "")
-                passList.append(wipass[1])
+            if "Open" in getwifipass[i] or "Absent" in getwifipass[i]:
+                passList.append("No Password")
+                break
+
+            else:
+                if "Key Content" in getwifipass[i]:
+                    wipass = getwifipass[i]
+                    wipass = wipass.split(":")
+                    wipass[1] = wipass[1].replace("\\r", "")
+                    passList.append(wipass[1])
+                    break
 
     return wifiList, passList
     
